@@ -22,7 +22,9 @@
         <div id="notifikasi" class="notifikasi">Belum ada pemberitahuan</div>
     </div>
 
-    <!-- 🔹 Ambil Data Notifikasi dari `enc.json` -->
+    <!-- 🔹 Tambahkan Audio untuk Suara Notifikasi -->
+    <audio id="notifSound" src="https://anc-zeta.vercel.app/sounds/soundnotif.mp3"></audio>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             fetch("enc.json")
@@ -47,8 +49,12 @@
       window.OneSignal = window.OneSignal || [];
       OneSignal.push(function() {
         OneSignal.init({
-          appId: "999be1ed-67fb-43e9-a4ed-b594362b7601",  // 🔹 Ganti dengan App ID milikmu
+          appId: "999be1ed-67fb-43e9-a4ed-b594362b7601",
           notifyButton: { enable: true }
+        });
+
+        OneSignal.on('notificationDisplay', function() {
+          document.getElementById("notifSound").play(); // 🔹 Putar suara saat notifikasi muncul
         });
       });
     </script>
