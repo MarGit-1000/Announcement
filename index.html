@@ -22,6 +22,7 @@
         <div id="notifikasi" class="notifikasi">Belum ada pemberitahuan</div>
     </div>
 
+    <!-- 🔹 Ambil Data Notifikasi dari `enc.json` -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             fetch("enc.json")
@@ -46,7 +47,7 @@
       window.OneSignal = window.OneSignal || [];
       OneSignal.push(function() {
         OneSignal.init({
-          appId: "999be1ed-67fb-43e9-a4ed-b594362b7601",
+          appId: "999be1ed-67fb-43e9-a4ed-b594362b7601",  // 🔹 Ganti dengan App ID milikmu
           notifyButton: { enable: true }
         });
       });
