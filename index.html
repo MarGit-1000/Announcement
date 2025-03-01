@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pemberitahuan</title>
+    
+    <!-- 🔹 PWA & Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- 🔹 Tambahkan icon untuk PWA -->
+    <link rel="icon" href="icon.png" type="image/png">
+    
+    <!-- 🔹 Tambahkan warna tema -->
+    <meta name="theme-color" content="#ffffff">
+    
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -11,23 +21,35 @@
         <h1 class="title">Pemberitahuan Saat Ini</h1>
         <div id="notifikasi" class="notifikasi">Belum ada pemberitahuan</div>
     </div>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-    fetch("enc.json")
-        .then(response => response.json())
-        .then(data => {
-            const notifikasiBox = document.getElementById("notifikasi");
-            if (Array.isArray(data.pemberitahuan) && data.pemberitahuan.length > 0) {
-                notifikasiBox.innerHTML = data.pemberitahuan.map(item => `<p>${item}</p>`).join("");
-            } else {
-                notifikasiBox.innerText = "Belum ada pemberitahuan";
-            }
-        })
-        .catch(error => {
-            console.error("Gagal mengambil data", error);
+            fetch("enc.json")
+                .then(response => response.json())
+                .then(data => {
+                    const notifikasiBox = document.getElementById("notifikasi");
+                    if (Array.isArray(data.pemberitahuan) && data.pemberitahuan.length > 0) {
+                        notifikasiBox.innerHTML = data.pemberitahuan.map(item => `<p>${item}</p>`).join("");
+                    } else {
+                        notifikasiBox.innerText = "Belum ada pemberitahuan";
+                    }
+                })
+                .catch(error => {
+                    console.error("Gagal mengambil data", error);
+                });
         });
-});
+    </script>
+
+    <!-- 🔹 Kode OneSignal -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "999be1ed-67fb-43e9-a4ed-b594362b7601",
+          notifyButton: { enable: true }
+        });
+      });
     </script>
 </body>
 </html>
