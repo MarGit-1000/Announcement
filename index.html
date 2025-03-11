@@ -20,6 +20,9 @@
     <div class="container">
         <h1 class="title">Pemberitahuan Saat Ini</h1>
         <div id="notifikasi" class="notifikasi">Belum ada pemberitahuan</div>
+        
+        <!-- 🔹 Tombol untuk mengaktifkan notifikasi -->
+        <button id="allowNotif">Allow Notifikasi</button>
     </div>
 
     <!-- 🔹 Tambahkan Audio untuk Suara Notifikasi -->
@@ -40,6 +43,20 @@
                 .catch(error => {
                     console.error("Gagal mengambil data", error);
                 });
+        });
+
+        document.getElementById("allowNotif").addEventListener("click", () => {
+            OneSignal.push(function() {
+                OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+                    if (!isEnabled) {
+                        OneSignal.push(function() {
+                            OneSignal.registerForPushNotifications();
+                        });
+                    } else {
+                        alert("Notifikasi sudah diaktifkan.");
+                    }
+                });
+            });
         });
     </script>
 
